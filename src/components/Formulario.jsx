@@ -2,12 +2,11 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import React, { useState } from "react";
 
 const Formulario = () => {
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
-  const [dni, setDni] = useState("");
-  const [email, setEmail] = useState("");
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [dni, setDni] = useState('');
+  const [email, setEmail] = useState('');
   const [datos, setDatos] = useState([]);
-
 
   const handleInputChange = (e, setState) => {
     setState(e.target.value);
@@ -15,12 +14,13 @@ const Formulario = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDatos([...datos, nombre, apellido, dni, email]);
-    setNombre("");
-    setApellido("");
-    setDni("");
-    setEmail("");
     if (nombre && apellido && dni && email) {
+      setDatos([...datos, nombre, apellido, dni, email]);
+      setNombre('');
+      setApellido('');
+      setDni('');
+      setEmail('');
+
       Swal.fire("Se enviaron los datos");
     } else {
       Swal.fire("Faltan campos por llenar");
