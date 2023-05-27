@@ -6,7 +6,8 @@ const Formulario = () => {
   const [apellido, setApellido] = useState("");
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
-  const [formularioEnviado, setFormularioEnviado] = useState(false);
+  const [datos, setDatos] = useState([]);
+
 
   const handleInputChange = (e, setState) => {
     setState(e.target.value);
@@ -14,33 +15,29 @@ const Formulario = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDatos([...datos, nombre, apellido, dni, email]);
+    setNombre("");
+    setApellido("");
+    setDni("");
+    setEmail("");
     if (nombre && apellido && dni && email) {
-        Swal.fire('Se enviaron los datos');
-        setFormularioEnviado(true);
+      Swal.fire("Se enviaron los datos");
     } else {
-        Swal.fire('Faltan campos por llenar');
+      Swal.fire("Faltan campos por llenar");
     }
-    };
-  
-    const handleFormReset = () => {
-      setFormularioEnviado(true);
-      setNombre('');
-      setApellido('');
-      setDni('');
-      setEmail('');
-      };
-  
+  };
 
   return (
     <Container className="pt-4 px-3">
-      <Form onSubmit={handleSubmit} onReset={handleFormReset}>
+      <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3" controlId="nombre">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ingese su nombre" value={formularioEnviado ? '' : nombre}
+                placeholder="Ingese su nombre"
+                value={nombre}
                 onChange={(e) => handleInputChange(e, setNombre)}
               />
             </Form.Group>
@@ -50,7 +47,8 @@ const Formulario = () => {
               <Form.Label>Apellido</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ingrese su apellido" value={formularioEnviado ? '' : apellido}
+                placeholder="Ingrese su apellido"
+                value={apellido}
                 onChange={(e) => handleInputChange(e, setApellido)}
               />
             </Form.Group>
@@ -60,7 +58,8 @@ const Formulario = () => {
               <Form.Label>DNI</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ingrese su dni" value={formularioEnviado ? '' : dni}
+                placeholder="Ingrese su dni"
+                value={dni}
                 onChange={(e) => handleInputChange(e, setDni)}
               />
             </Form.Group>
@@ -70,7 +69,8 @@ const Formulario = () => {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Ingrese su email" value={formularioEnviado ? '' : email}
+                placeholder="Ingrese su email"
+                value={email}
                 onChange={(e) => handleInputChange(e, setEmail)}
               />
             </Form.Group>
